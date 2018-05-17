@@ -1,113 +1,107 @@
+<style scoped>
+  .layout-con{
+    height: 100%;
+    width: 100%;
+  }
+  .menu-item span{
+    display: inline-block;
+    overflow: hidden;
+    width: 69px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+    transition: width .2s ease .2s;
+  }
+  .menu-item i{
+    transform: translateX(0px);
+    transition: font-size .2s ease, transform .2s ease;
+    vertical-align: middle;
+    font-size: 16px;
+  }
+  .collapsed-menu span{
+    width: 0px;
+    transition: width .2s ease;
+  }
+  .collapsed-menu i{
+    transform: translateX(5px);
+    transition: font-size .2s ease .2s, transform .2s ease .2s;
+    vertical-align: middle;
+    font-size: 22px;
+  }
+</style>
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div class="layout">
+    <Layout :style="{minHeight: '100vh'}">
+
+      <Sider hide-trigger :style="{background: '#fff'}">
+        <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
+          <Submenu name="1">
+            <template slot="title">
+              <Icon type="ios-navigate"></Icon>
+              基本资料
+            </template>
+            <router-link to="/staff"><MenuItem name="1-1">Option 1</MenuItem></router-link>
+            <router-link to="/buyer"><MenuItem name="1-2">Option 2</MenuItem></router-link>
+            <MenuItem name="1-3">Option 3</MenuItem>
+          </Submenu>
+          <Submenu name="2">
+            <template slot="title">
+              <Icon type="ios-keypad"></Icon>
+              客户关系
+            </template>
+            <MenuItem name="2-1">Option 1</MenuItem>
+            <MenuItem name="2-2">Option 2</MenuItem>
+          </Submenu>
+          <Submenu name="3">
+            <template slot="title">
+              <Icon type="ios-analytics"></Icon>
+              房屋销售
+            </template>
+            <MenuItem name="3-1">Option 1</MenuItem>
+            <MenuItem name="3-2">Option 2</MenuItem>
+          </Submenu>
+        </Menu>
+      </Sider>
+
+
+      <Layout>
+        <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
+          <div :style= "{fontSize:'24px'}"   class="title">
+          <Icon type="navicon"></Icon>
+          <span>房屋销售管理系统</span>
+          </div>
+        </Header>
+        <Content :style="{padding: '0 16px 16px'}">
+          <Breadcrumb :style="{margin: '16px 0'}">
+            <BreadcrumbItem>Home</BreadcrumbItem>
+            <BreadcrumbItem>Components</BreadcrumbItem>
+            <BreadcrumbItem>Layout</BreadcrumbItem>
+          </Breadcrumb>
+          <Card>
+
+            <div style="height: 600px"> <router-view></router-view></div>
+
+
+          </Card>
+        </Content>
+      </Layout>
+    </Layout>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  export default {
+    data () {
+      return {
+        isCollapsed: false
+      };
+    },
+    computed: {
+      menuitemClasses: function () {
+        return [
+          'menu-item',
+          this.isCollapsed ? 'collapsed-menu' : ''
+        ]
+      }
     }
   }
-}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
