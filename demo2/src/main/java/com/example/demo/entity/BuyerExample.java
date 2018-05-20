@@ -694,6 +694,66 @@ public class BuyerExample {
             addCriterion("buyPhone not between", value1, value2, "buyphone");
             return (Criteria) this;
         }
+
+        public Criteria andBuylevelIsNull() {
+            addCriterion("buyLevel is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelIsNotNull() {
+            addCriterion("buyLevel is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelEqualTo(Integer value) {
+            addCriterion("buyLevel =", value, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelNotEqualTo(Integer value) {
+            addCriterion("buyLevel <>", value, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelGreaterThan(Integer value) {
+            addCriterion("buyLevel >", value, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("buyLevel >=", value, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelLessThan(Integer value) {
+            addCriterion("buyLevel <", value, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelLessThanOrEqualTo(Integer value) {
+            addCriterion("buyLevel <=", value, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelIn(List<Integer> values) {
+            addCriterion("buyLevel in", values, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelNotIn(List<Integer> values) {
+            addCriterion("buyLevel not in", values, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelBetween(Integer value1, Integer value2) {
+            addCriterion("buyLevel between", value1, value2, "buylevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuylevelNotBetween(Integer value1, Integer value2) {
+            addCriterion("buyLevel not between", value1, value2, "buylevel");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

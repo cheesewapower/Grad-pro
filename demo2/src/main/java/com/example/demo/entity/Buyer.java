@@ -21,6 +21,8 @@ public class Buyer {
 
     private String buyphone;
 
+    private Integer buylevel;
+
     public Integer getId() {
         return id;
     }
@@ -91,5 +93,13 @@ public class Buyer {
 
     public void setBuyphone(String buyphone) {
         this.buyphone = buyphone == null ? null : buyphone.trim();
+    }
+
+    public Integer getBuylevel() {
+        return buylevel;
+    }
+
+    public void setBuylevel(Integer buylevel) {
+        this.buylevel = buylevel;
     }
 }

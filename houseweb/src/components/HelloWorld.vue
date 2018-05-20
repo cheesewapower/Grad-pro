@@ -40,8 +40,8 @@
               <Icon type="ios-navigate"></Icon>
               基本资料
             </template>
-            <router-link to="/staff"><MenuItem name="1-1">客户管理</MenuItem></router-link>
-            <router-link to="/buyer"><MenuItem name="1-2">员工管理</MenuItem></router-link>
+            <router-link to="/staff"><MenuItem name="1-1">员工管理</MenuItem></router-link>
+            <router-link to="/buyer"><MenuItem name="1-2">客户管理</MenuItem></router-link>
 
           </Submenu>
           <Submenu name="2">
