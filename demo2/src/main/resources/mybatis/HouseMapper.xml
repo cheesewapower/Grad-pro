@@ -7,13 +7,13 @@
     <result column="buyId" property="buyid" jdbcType="INTEGER" />
     <result column="buyName" property="buyname" jdbcType="VARCHAR" />
     <result column="houseSellDate" property="houseselldate" jdbcType="TIMESTAMP" />
-    <result column="houseStruc" property="housestruc" jdbcType="VARCHAR" />
-    <result column="houseAdd" property="houseadd" jdbcType="VARCHAR" />
-    <result column="houseYear" property="houseyear" jdbcType="VARCHAR" />
+    <result column="houseYear" property="houseyear" jdbcType="INTEGER" />
     <result column="houseSize" property="housesize" jdbcType="DOUBLE" />
-    <result column="hosueCq" property="hosuecq" jdbcType="INTEGER" />
-    <result column="houseStatus" property="housestatus" jdbcType="VARCHAR" />
-    <result column="houseSeller" property="houseseller" jdbcType="VARCHAR" />
+    <result column="hosueCq" property="hosuecq" jdbcType="VARCHAR" />
+    <result column="houseStatus" property="housestatus" jdbcType="INTEGER" />
+    <result column="houseSeller" property="houseseller" jdbcType="INTEGER" />
+    <result column="housePrice" property="houseprice" jdbcType="INTEGER" />
+    <result column="buildingId" property="buildingid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, houseSn, buyId, buyName, houseSellDate, houseStruc, houseAdd, houseYear, houseSize, 
-    hosueCq, houseStatus, houseSeller
+    id, houseSn, buyId, buyName, houseSellDate, houseYear, houseSize, hosueCq, houseStatus, 
+    houseSeller, housePrice, buildingId
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.HouseExample" >
     select
@@ -109,14 +109,14 @@
   </delete>
   <insert id="insert" parameterType="com.example.demo.entity.House" >
     insert into house (id, houseSn, buyId, 
-      buyName, houseSellDate, houseStruc, 
-      houseAdd, houseYear, houseSize, 
-      hosueCq, houseStatus, houseSeller
+      buyName, houseSellDate, houseYear, 
+      houseSize, hosueCq, houseStatus, 
+      houseSeller, housePrice, buildingId
       )
     values (#{id,jdbcType=INTEGER}, #{housesn,jdbcType=VARCHAR}, #{buyid,jdbcType=INTEGER}, 
-      #{buyname,jdbcType=VARCHAR}, #{houseselldate,jdbcType=TIMESTAMP}, #{housestruc,jdbcType=VARCHAR}, 
-      #{houseadd,jdbcType=VARCHAR}, #{houseyear,jdbcType=VARCHAR}, #{housesize,jdbcType=DOUBLE}, 
-      #{hosuecq,jdbcType=INTEGER}, #{housestatus,jdbcType=VARCHAR}, #{houseseller,jdbcType=VARCHAR}
+      #{buyname,jdbcType=VARCHAR}, #{houseselldate,jdbcType=TIMESTAMP}, #{houseyear,jdbcType=INTEGER}, 
+      #{housesize,jdbcType=DOUBLE}, #{hosuecq,jdbcType=VARCHAR}, #{housestatus,jdbcType=INTEGER}, 
+      #{houseseller,jdbcType=INTEGER}, #{houseprice,jdbcType=INTEGER}, #{buildingid,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.House" >
@@ -137,12 +137,6 @@
       <if test="houseselldate != null" >
         houseSellDate,
       </if>
-      <if test="housestruc != null" >
-        houseStruc,
-      </if>
-      <if test="houseadd != null" >
-        houseAdd,
-      </if>
       <if test="houseyear != null" >
         houseYear,
       </if>
@@ -157,6 +151,12 @@
       </if>
       <if test="houseseller != null" >
         houseSeller,
+      </if>
+      <if test="houseprice != null" >
+        housePrice,
+      </if>
+      <if test="buildingid != null" >
+        buildingId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -175,26 +175,26 @@
       <if test="houseselldate != null" >
         #{houseselldate,jdbcType=TIMESTAMP},
       </if>
-      <if test="housestruc != null" >
-        #{housestruc,jdbcType=VARCHAR},
-      </if>
-      <if test="houseadd != null" >
-        #{houseadd,jdbcType=VARCHAR},
-      </if>
       <if test="houseyear != null" >
-        #{houseyear,jdbcType=VARCHAR},
+        #{houseyear,jdbcType=INTEGER},
       </if>
       <if test="housesize != null" >
         #{housesize,jdbcType=DOUBLE},
       </if>
       <if test="hosuecq != null" >
-        #{hosuecq,jdbcType=INTEGER},
+        #{hosuecq,jdbcType=VARCHAR},
       </if>
       <if test="housestatus != null" >
-        #{housestatus,jdbcType=VARCHAR},
+        #{housestatus,jdbcType=INTEGER},
       </if>
       <if test="houseseller != null" >
-        #{houseseller,jdbcType=VARCHAR},
+        #{houseseller,jdbcType=INTEGER},
+      </if>
+      <if test="houseprice != null" >
+        #{houseprice,jdbcType=INTEGER},
+      </if>
+      <if test="buildingid != null" >
+        #{buildingid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -222,26 +222,26 @@
       <if test="record.houseselldate != null" >
         houseSellDate = #{record.houseselldate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.housestruc != null" >
-        houseStruc = #{record.housestruc,jdbcType=VARCHAR},
-      </if>
-      <if test="record.houseadd != null" >
-        houseAdd = #{record.houseadd,jdbcType=VARCHAR},
-      </if>
       <if test="record.houseyear != null" >
-        houseYear = #{record.houseyear,jdbcType=VARCHAR},
+        houseYear = #{record.houseyear,jdbcType=INTEGER},
       </if>
       <if test="record.housesize != null" >
         houseSize = #{record.housesize,jdbcType=DOUBLE},
       </if>
       <if test="record.hosuecq != null" >
-        hosueCq = #{record.hosuecq,jdbcType=INTEGER},
+        hosueCq = #{record.hosuecq,jdbcType=VARCHAR},
       </if>
       <if test="record.housestatus != null" >
-        houseStatus = #{record.housestatus,jdbcType=VARCHAR},
+        houseStatus = #{record.housestatus,jdbcType=INTEGER},
       </if>
       <if test="record.houseseller != null" >
-        houseSeller = #{record.houseseller,jdbcType=VARCHAR},
+        houseSeller = #{record.houseseller,jdbcType=INTEGER},
+      </if>
+      <if test="record.houseprice != null" >
+        housePrice = #{record.houseprice,jdbcType=INTEGER},
+      </if>
+      <if test="record.buildingid != null" >
+        buildingId = #{record.buildingid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -255,13 +255,13 @@
       buyId = #{record.buyid,jdbcType=INTEGER},
       buyName = #{record.buyname,jdbcType=VARCHAR},
       houseSellDate = #{record.houseselldate,jdbcType=TIMESTAMP},
-      houseStruc = #{record.housestruc,jdbcType=VARCHAR},
-      houseAdd = #{record.houseadd,jdbcType=VARCHAR},
-      houseYear = #{record.houseyear,jdbcType=VARCHAR},
+      houseYear = #{record.houseyear,jdbcType=INTEGER},
       houseSize = #{record.housesize,jdbcType=DOUBLE},
-      hosueCq = #{record.hosuecq,jdbcType=INTEGER},
-      houseStatus = #{record.housestatus,jdbcType=VARCHAR},
-      houseSeller = #{record.houseseller,jdbcType=VARCHAR}
+      hosueCq = #{record.hosuecq,jdbcType=VARCHAR},
+      houseStatus = #{record.housestatus,jdbcType=INTEGER},
+      houseSeller = #{record.houseseller,jdbcType=INTEGER},
+      housePrice = #{record.houseprice,jdbcType=INTEGER},
+      buildingId = #{record.buildingid,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -281,26 +281,26 @@
       <if test="houseselldate != null" >
         houseSellDate = #{houseselldate,jdbcType=TIMESTAMP},
       </if>
-      <if test="housestruc != null" >
-        houseStruc = #{housestruc,jdbcType=VARCHAR},
-      </if>
-      <if test="houseadd != null" >
-        houseAdd = #{houseadd,jdbcType=VARCHAR},
-      </if>
       <if test="houseyear != null" >
-        houseYear = #{houseyear,jdbcType=VARCHAR},
+        houseYear = #{houseyear,jdbcType=INTEGER},
       </if>
       <if test="housesize != null" >
         houseSize = #{housesize,jdbcType=DOUBLE},
       </if>
       <if test="hosuecq != null" >
-        hosueCq = #{hosuecq,jdbcType=INTEGER},
+        hosueCq = #{hosuecq,jdbcType=VARCHAR},
       </if>
       <if test="housestatus != null" >
-        houseStatus = #{housestatus,jdbcType=VARCHAR},
+        houseStatus = #{housestatus,jdbcType=INTEGER},
       </if>
       <if test="houseseller != null" >
-        houseSeller = #{houseseller,jdbcType=VARCHAR},
+        houseSeller = #{houseseller,jdbcType=INTEGER},
+      </if>
+      <if test="houseprice != null" >
+        housePrice = #{houseprice,jdbcType=INTEGER},
+      </if>
+      <if test="buildingid != null" >
+        buildingId = #{buildingid,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -311,13 +311,13 @@
       buyId = #{buyid,jdbcType=INTEGER},
       buyName = #{buyname,jdbcType=VARCHAR},
       houseSellDate = #{houseselldate,jdbcType=TIMESTAMP},
-      houseStruc = #{housestruc,jdbcType=VARCHAR},
-      houseAdd = #{houseadd,jdbcType=VARCHAR},
-      houseYear = #{houseyear,jdbcType=VARCHAR},
+      houseYear = #{houseyear,jdbcType=INTEGER},
       houseSize = #{housesize,jdbcType=DOUBLE},
-      hosueCq = #{hosuecq,jdbcType=INTEGER},
-      houseStatus = #{housestatus,jdbcType=VARCHAR},
-      houseSeller = #{houseseller,jdbcType=VARCHAR}
+      hosueCq = #{hosuecq,jdbcType=VARCHAR},
+      houseStatus = #{housestatus,jdbcType=INTEGER},
+      houseSeller = #{houseseller,jdbcType=INTEGER},
+      housePrice = #{houseprice,jdbcType=INTEGER},
+      buildingId = #{buildingid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

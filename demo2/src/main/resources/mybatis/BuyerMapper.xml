@@ -8,10 +8,10 @@
     <result column="buyDate" property="buydate" jdbcType="TIMESTAMP" />
     <result column="houseId" property="houseid" jdbcType="INTEGER" />
     <result column="buyIncome" property="buyincome" jdbcType="INTEGER" />
-    <result column="buyType" property="buytype" jdbcType="VARCHAR" />
+    <result column="buyDesc" property="buydesc" jdbcType="VARCHAR" />
     <result column="buyHJ" property="buyhj" jdbcType="VARCHAR" />
     <result column="buyPhone" property="buyphone" jdbcType="VARCHAR" />
-    <result column="buyLevel" property="buylevel" jdbcType="INTEGER" />
+    <result column="buyType" property="buytype" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, buyName, buySti, buyDate, houseId, buyIncome, buyType, buyHJ, buyPhone, buyLevel
+    id, buyName, buySti, buyDate, houseId, buyIncome, buyDesc, buyHJ, buyPhone, buyType
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.BuyerExample" >
     select
@@ -107,12 +107,12 @@
   <insert id="insert" parameterType="com.example.demo.entity.Buyer" >
     insert into buyer (id, buyName, buySti, 
       buyDate, houseId, buyIncome, 
-      buyType, buyHJ, buyPhone, 
-      buyLevel)
+      buyDesc, buyHJ, buyPhone, 
+      buyType)
     values (#{id,jdbcType=INTEGER}, #{buyname,jdbcType=VARCHAR}, #{buysti,jdbcType=VARCHAR}, 
       #{buydate,jdbcType=TIMESTAMP}, #{houseid,jdbcType=INTEGER}, #{buyincome,jdbcType=INTEGER}, 
-      #{buytype,jdbcType=VARCHAR}, #{buyhj,jdbcType=VARCHAR}, #{buyphone,jdbcType=VARCHAR}, 
-      #{buylevel,jdbcType=INTEGER})
+      #{buydesc,jdbcType=VARCHAR}, #{buyhj,jdbcType=VARCHAR}, #{buyphone,jdbcType=VARCHAR}, 
+      #{buytype,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.Buyer" >
     insert into buyer
@@ -135,8 +135,8 @@
       <if test="buyincome != null" >
         buyIncome,
       </if>
-      <if test="buytype != null" >
-        buyType,
+      <if test="buydesc != null" >
+        buyDesc,
       </if>
       <if test="buyhj != null" >
         buyHJ,
@@ -144,8 +144,8 @@
       <if test="buyphone != null" >
         buyPhone,
       </if>
-      <if test="buylevel != null" >
-        buyLevel,
+      <if test="buytype != null" >
+        buyType,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -167,8 +167,8 @@
       <if test="buyincome != null" >
         #{buyincome,jdbcType=INTEGER},
       </if>
-      <if test="buytype != null" >
-        #{buytype,jdbcType=VARCHAR},
+      <if test="buydesc != null" >
+        #{buydesc,jdbcType=VARCHAR},
       </if>
       <if test="buyhj != null" >
         #{buyhj,jdbcType=VARCHAR},
@@ -176,8 +176,8 @@
       <if test="buyphone != null" >
         #{buyphone,jdbcType=VARCHAR},
       </if>
-      <if test="buylevel != null" >
-        #{buylevel,jdbcType=INTEGER},
+      <if test="buytype != null" >
+        #{buytype,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -208,8 +208,8 @@
       <if test="record.buyincome != null" >
         buyIncome = #{record.buyincome,jdbcType=INTEGER},
       </if>
-      <if test="record.buytype != null" >
-        buyType = #{record.buytype,jdbcType=VARCHAR},
+      <if test="record.buydesc != null" >
+        buyDesc = #{record.buydesc,jdbcType=VARCHAR},
       </if>
       <if test="record.buyhj != null" >
         buyHJ = #{record.buyhj,jdbcType=VARCHAR},
@@ -217,8 +217,8 @@
       <if test="record.buyphone != null" >
         buyPhone = #{record.buyphone,jdbcType=VARCHAR},
       </if>
-      <if test="record.buylevel != null" >
-        buyLevel = #{record.buylevel,jdbcType=INTEGER},
+      <if test="record.buytype != null" >
+        buyType = #{record.buytype,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -233,10 +233,10 @@
       buyDate = #{record.buydate,jdbcType=TIMESTAMP},
       houseId = #{record.houseid,jdbcType=INTEGER},
       buyIncome = #{record.buyincome,jdbcType=INTEGER},
-      buyType = #{record.buytype,jdbcType=VARCHAR},
+      buyDesc = #{record.buydesc,jdbcType=VARCHAR},
       buyHJ = #{record.buyhj,jdbcType=VARCHAR},
       buyPhone = #{record.buyphone,jdbcType=VARCHAR},
-      buyLevel = #{record.buylevel,jdbcType=INTEGER}
+      buyType = #{record.buytype,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,8 +259,8 @@
       <if test="buyincome != null" >
         buyIncome = #{buyincome,jdbcType=INTEGER},
       </if>
-      <if test="buytype != null" >
-        buyType = #{buytype,jdbcType=VARCHAR},
+      <if test="buydesc != null" >
+        buyDesc = #{buydesc,jdbcType=VARCHAR},
       </if>
       <if test="buyhj != null" >
         buyHJ = #{buyhj,jdbcType=VARCHAR},
@@ -268,8 +268,8 @@
       <if test="buyphone != null" >
         buyPhone = #{buyphone,jdbcType=VARCHAR},
       </if>
-      <if test="buylevel != null" >
-        buyLevel = #{buylevel,jdbcType=INTEGER},
+      <if test="buytype != null" >
+        buyType = #{buytype,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -281,10 +281,10 @@
       buyDate = #{buydate,jdbcType=TIMESTAMP},
       houseId = #{houseid,jdbcType=INTEGER},
       buyIncome = #{buyincome,jdbcType=INTEGER},
-      buyType = #{buytype,jdbcType=VARCHAR},
+      buyDesc = #{buydesc,jdbcType=VARCHAR},
       buyHJ = #{buyhj,jdbcType=VARCHAR},
       buyPhone = #{buyphone,jdbcType=VARCHAR},
-      buyLevel = #{buylevel,jdbcType=INTEGER}
+      buyType = #{buytype,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -485,73 +485,73 @@ public class BuyerExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeIsNull() {
-            addCriterion("buyType is null");
+        public Criteria andBuydescIsNull() {
+            addCriterion("buyDesc is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeIsNotNull() {
-            addCriterion("buyType is not null");
+        public Criteria andBuydescIsNotNull() {
+            addCriterion("buyDesc is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeEqualTo(String value) {
-            addCriterion("buyType =", value, "buytype");
+        public Criteria andBuydescEqualTo(String value) {
+            addCriterion("buyDesc =", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeNotEqualTo(String value) {
-            addCriterion("buyType <>", value, "buytype");
+        public Criteria andBuydescNotEqualTo(String value) {
+            addCriterion("buyDesc <>", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeGreaterThan(String value) {
-            addCriterion("buyType >", value, "buytype");
+        public Criteria andBuydescGreaterThan(String value) {
+            addCriterion("buyDesc >", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeGreaterThanOrEqualTo(String value) {
-            addCriterion("buyType >=", value, "buytype");
+        public Criteria andBuydescGreaterThanOrEqualTo(String value) {
+            addCriterion("buyDesc >=", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeLessThan(String value) {
-            addCriterion("buyType <", value, "buytype");
+        public Criteria andBuydescLessThan(String value) {
+            addCriterion("buyDesc <", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeLessThanOrEqualTo(String value) {
-            addCriterion("buyType <=", value, "buytype");
+        public Criteria andBuydescLessThanOrEqualTo(String value) {
+            addCriterion("buyDesc <=", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeLike(String value) {
-            addCriterion("buyType like", value, "buytype");
+        public Criteria andBuydescLike(String value) {
+            addCriterion("buyDesc like", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeNotLike(String value) {
-            addCriterion("buyType not like", value, "buytype");
+        public Criteria andBuydescNotLike(String value) {
+            addCriterion("buyDesc not like", value, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeIn(List<String> values) {
-            addCriterion("buyType in", values, "buytype");
+        public Criteria andBuydescIn(List<String> values) {
+            addCriterion("buyDesc in", values, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeNotIn(List<String> values) {
-            addCriterion("buyType not in", values, "buytype");
+        public Criteria andBuydescNotIn(List<String> values) {
+            addCriterion("buyDesc not in", values, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeBetween(String value1, String value2) {
-            addCriterion("buyType between", value1, value2, "buytype");
+        public Criteria andBuydescBetween(String value1, String value2) {
+            addCriterion("buyDesc between", value1, value2, "buydesc");
             return (Criteria) this;
         }
 
-        public Criteria andBuytypeNotBetween(String value1, String value2) {
-            addCriterion("buyType not between", value1, value2, "buytype");
+        public Criteria andBuydescNotBetween(String value1, String value2) {
+            addCriterion("buyDesc not between", value1, value2, "buydesc");
             return (Criteria) this;
         }
 
@@ -695,63 +695,63 @@ public class BuyerExample {
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelIsNull() {
-            addCriterion("buyLevel is null");
+        public Criteria andBuytypeIsNull() {
+            addCriterion("buyType is null");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelIsNotNull() {
-            addCriterion("buyLevel is not null");
+        public Criteria andBuytypeIsNotNull() {
+            addCriterion("buyType is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelEqualTo(Integer value) {
-            addCriterion("buyLevel =", value, "buylevel");
+        public Criteria andBuytypeEqualTo(Integer value) {
+            addCriterion("buyType =", value, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelNotEqualTo(Integer value) {
-            addCriterion("buyLevel <>", value, "buylevel");
+        public Criteria andBuytypeNotEqualTo(Integer value) {
+            addCriterion("buyType <>", value, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelGreaterThan(Integer value) {
-            addCriterion("buyLevel >", value, "buylevel");
+        public Criteria andBuytypeGreaterThan(Integer value) {
+            addCriterion("buyType >", value, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelGreaterThanOrEqualTo(Integer value) {
-            addCriterion("buyLevel >=", value, "buylevel");
+        public Criteria andBuytypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("buyType >=", value, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelLessThan(Integer value) {
-            addCriterion("buyLevel <", value, "buylevel");
+        public Criteria andBuytypeLessThan(Integer value) {
+            addCriterion("buyType <", value, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelLessThanOrEqualTo(Integer value) {
-            addCriterion("buyLevel <=", value, "buylevel");
+        public Criteria andBuytypeLessThanOrEqualTo(Integer value) {
+            addCriterion("buyType <=", value, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelIn(List<Integer> values) {
-            addCriterion("buyLevel in", values, "buylevel");
+        public Criteria andBuytypeIn(List<Integer> values) {
+            addCriterion("buyType in", values, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelNotIn(List<Integer> values) {
-            addCriterion("buyLevel not in", values, "buylevel");
+        public Criteria andBuytypeNotIn(List<Integer> values) {
+            addCriterion("buyType not in", values, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelBetween(Integer value1, Integer value2) {
-            addCriterion("buyLevel between", value1, value2, "buylevel");
+        public Criteria andBuytypeBetween(Integer value1, Integer value2) {
+            addCriterion("buyType between", value1, value2, "buytype");
             return (Criteria) this;
         }
 
-        public Criteria andBuylevelNotBetween(Integer value1, Integer value2) {
-            addCriterion("buyLevel not between", value1, value2, "buylevel");
+        public Criteria andBuytypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("buyType not between", value1, value2, "buytype");
             return (Criteria) this;
         }
     }

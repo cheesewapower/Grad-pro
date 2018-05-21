@@ -13,19 +13,19 @@ public class House {
 
     private Date houseselldate;
 
-    private String housestruc;
-
-    private String houseadd;
-
-    private String houseyear;
+    private Integer houseyear;
 
     private Double housesize;
 
-    private Integer hosuecq;
+    private String hosuecq;
 
-    private String housestatus;
+    private Integer housestatus;
 
-    private String houseseller;
+    private Integer houseseller;
+
+    private Integer houseprice;
+
+    private Integer buildingid;
 
     public Integer getId() {
         return id;
@@ -67,28 +67,12 @@ public class House {
         this.houseselldate = houseselldate;
     }
 
-    public String getHousestruc() {
-        return housestruc;
-    }
-
-    public void setHousestruc(String housestruc) {
-        this.housestruc = housestruc == null ? null : housestruc.trim();
-    }
-
-    public String getHouseadd() {
-        return houseadd;
-    }
-
-    public void setHouseadd(String houseadd) {
-        this.houseadd = houseadd == null ? null : houseadd.trim();
-    }
-
-    public String getHouseyear() {
+    public Integer getHouseyear() {
         return houseyear;
     }
 
-    public void setHouseyear(String houseyear) {
-        this.houseyear = houseyear == null ? null : houseyear.trim();
+    public void setHouseyear(Integer houseyear) {
+        this.houseyear = houseyear;
     }
 
     public Double getHousesize() {
@@ -99,27 +83,43 @@ public class House {
         this.housesize = housesize;
     }
 
-    public Integer getHosuecq() {
+    public String getHosuecq() {
         return hosuecq;
     }
 
-    public void setHosuecq(Integer hosuecq) {
-        this.hosuecq = hosuecq;
+    public void setHosuecq(String hosuecq) {
+        this.hosuecq = hosuecq == null ? null : hosuecq.trim();
     }
 
-    public String getHousestatus() {
+    public Integer getHousestatus() {
         return housestatus;
     }
 
-    public void setHousestatus(String housestatus) {
-        this.housestatus = housestatus == null ? null : housestatus.trim();
+    public void setHousestatus(Integer housestatus) {
+        this.housestatus = housestatus;
     }
 
-    public String getHouseseller() {
+    public Integer getHouseseller() {
         return houseseller;
     }
 
-    public void setHouseseller(String houseseller) {
-        this.houseseller = houseseller == null ? null : houseseller.trim();
+    public void setHouseseller(Integer houseseller) {
+        this.houseseller = houseseller;
+    }
+
+    public Integer getHouseprice() {
+        return houseprice;
+    }
+
+    public void setHouseprice(Integer houseprice) {
+        this.houseprice = houseprice;
+    }
+
+    public Integer getBuildingid() {
+        return buildingid;
+    }
+
+    public void setBuildingid(Integer buildingid) {
+        this.buildingid = buildingid;
     }
 }

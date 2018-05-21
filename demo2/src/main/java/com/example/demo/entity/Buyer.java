@@ -15,13 +15,13 @@ public class Buyer {
 
     private Integer buyincome;
 
-    private String buytype;
+    private String buydesc;
 
     private String buyhj;
 
     private String buyphone;
 
-    private Integer buylevel;
+    private Integer buytype;
 
     public Integer getId() {
         return id;
@@ -71,12 +71,12 @@ public class Buyer {
         this.buyincome = buyincome;
     }
 
-    public String getBuytype() {
-        return buytype;
+    public String getBuydesc() {
+        return buydesc;
     }
 
-    public void setBuytype(String buytype) {
-        this.buytype = buytype == null ? null : buytype.trim();
+    public void setBuydesc(String buydesc) {
+        this.buydesc = buydesc == null ? null : buydesc.trim();
     }
 
     public String getBuyhj() {
@@ -95,11 +95,11 @@ public class Buyer {
         this.buyphone = buyphone == null ? null : buyphone.trim();
     }
 
-    public Integer getBuylevel() {
-        return buylevel;
+    public Integer getBuytype() {
+        return buytype;
     }
 
-    public void setBuylevel(Integer buylevel) {
-        this.buylevel = buylevel;
+    public void setBuytype(Integer buytype) {
+        this.buytype = buytype;
     }
 }
