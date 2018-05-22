@@ -4,6 +4,7 @@ import com.example.demo.entity.Staff;
 import com.example.demo.entity.StaffExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface StaffMapper {
     int countByExample(StaffExample example);
@@ -27,4 +28,6 @@ public interface StaffMapper {
     int updateByPrimaryKeySelective(Staff record);
 
     int updateByPrimaryKey(Staff record);
+
+    List<Staff> queryAllByPage(@Param("rowBounds") RowBounds rowBounds);
 }

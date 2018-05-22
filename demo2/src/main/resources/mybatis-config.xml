@@ -4,4 +4,5 @@
     <settings>
         <setting name="logImpl" value="SLF4J" />
     </settings>
+
 </configuration>

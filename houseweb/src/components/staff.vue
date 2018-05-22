@@ -5,11 +5,15 @@
 
 
     <div>
-      <Table stripe :columns="columns1" :data="data1"></Table>
+      <Table stripe :columns="columns1" :data="rows"></Table>
 
 
     </div>
-
+    <div>
+      <Page :style="{textAlign:'center',marginTop:'10px'}":total="total" :page-size-opts="page_opts" :current="page" :page-size="page_size"
+            v-on:on-change="pageChange" v-on:on-page-size-change="pageSizeChange"
+             show-sizer show-total show-elevator></Page>
+    </div>
 
 
 </div>
@@ -18,59 +22,103 @@
 
 
 <script>
+
     export default {
         name: "staff",
       data () {
         return {
+          total:100,
+          page:1,
+          page_size:10,
+          page_opts:[10,20,50],
+          rows:[],
           columns1: [
             {
-              title: 'Name',
-              key: 'name'
+              title: 'ID',
+              key: 'id'
             },
             {
-              title: 'Age',
-              key: 'age'
+              title: '员工姓名',
+              key: 'staffname'
             },
             {
-              title: 'Address',
-              key: 'address'
+              title: '员工所属部门',
+              key: 'staffde'
+            },
+            {
+              title: '年工资',
+              key: 'staffmoney'
+            },
+            {
+              title: '员工级别',
+              key: 'stafflever'
+            },
+            {
+              title: '员工描述',
+              key: 'staffdesc'
             }
           ],
-          data1: [
-            {
-              name: 'John Brown',
-              age: 18,
-              address: 'New York No. 1 Lake Park',
-              date: '2016-10-03'
-            },
-            {
-              name: 'Jim Green',
-              age: 24,
-              address: 'London No. 1 Lake Park',
-              date: '2016-10-01'
-            },
-            {
-              name: 'Joe Black',
-              age: 30,
-              address: 'Sydney No. 1 Lake Park',
-              date: '2016-10-02'
-            },
-            {
-              name: 'Jon Snow',
-              age: 26,
-              address: 'Ottawa No. 2 Lake Park',
-              date: '2016-10-04'
-            }
-          ]
+
+
         }
       },
-      mounted() {
-        this.axios.get("api/user/getUserByUserName?id=1")
+
+      created: function () {
+        this.axios.get("api/staff/findAllByPage",{
+          params: {
+            pageNum:1,
+            pageSize:10
+          }
+
+        })
           .then(response => {
-            this.results = response.data.user
+            console.log(response.data.list[0].staffname);
             console.log(response);
+            this.rows=response.data.list;
+            this.total=response.data.total;
           })
+      },
+
+      methods: {
+        pageChange:function (e) {
+
+          this.axios.get("api/staff/findAllByPage",{
+            params: {
+              pageNum:e,
+              pageSize:this.page_size
+            }
+          }).then(response => {
+
+            this.rows=response.data.list;
+            this.total=response.data.total;
+          })
+
+
+        },
+        pageSizeChange:function (e) {
+          this.axios.get("api/staff/findAllByPage",{
+            params: {
+              pageNum:this.page,
+              pageSize:e
+            }
+          }).then(response => {
+
+            this.rows=response.data.list;
+            this.total=response.data.total;
+          })
+
+        },
+
+
+
+
+
+
+
+
+
       }
+
     }
 </script>
 

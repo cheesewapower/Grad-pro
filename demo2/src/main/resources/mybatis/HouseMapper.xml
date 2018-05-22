@@ -15,6 +15,11 @@
     <result column="housePrice" property="houseprice" jdbcType="INTEGER" />
     <result column="buildingId" property="buildingid" jdbcType="INTEGER" />
   </resultMap>
+
+  <select id="queryAllByPage" resultMap="BaseResultMap">
+    SELECT * from house ORDER  BY id ASC
+  </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

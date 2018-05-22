@@ -41,7 +41,7 @@
               基本资料
             </template>
             <router-link to="/staff"><MenuItem name="1-1">员工管理</MenuItem></router-link>
-            <router-link to="/buyer"><MenuItem name="1-2">客户管理</MenuItem></router-link>
+            <router-link to="/house"><MenuItem name="1-2">房屋管理</MenuItem></router-link>
 
           </Submenu>
           <Submenu name="2">
@@ -49,8 +49,9 @@
               <Icon type="ios-keypad"></Icon>
               客户关系
             </template>
-            <MenuItem name="2-1">Option 1</MenuItem>
-            <MenuItem name="2-2">Option 2</MenuItem>
+            <MenuItem name="2-1">一般客户</MenuItem>
+            <MenuItem name="2-2">预约客户</MenuItem>
+            <MenuItem name="2-3">购房客户</MenuItem>
           </Submenu>
           <Submenu name="3">
             <template slot="title">
@@ -73,9 +74,7 @@
         </Header>
         <Content :style="{padding: '0 16px 16px'}">
           <Breadcrumb :style="{margin: '16px 0'}">
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Components</BreadcrumbItem>
-            <BreadcrumbItem>Layout</BreadcrumbItem>
+
           </Breadcrumb>
           <Card>
 

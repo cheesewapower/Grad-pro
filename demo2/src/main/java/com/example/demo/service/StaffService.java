@@ -1,5 +1,12 @@
 package com.example.demo.service;
 
-public interface StaffService {
+import com.example.demo.entity.Staff;
+import com.github.pagehelper.PageInfo;
 
+
+
+public interface StaffService {
+    Staff selectByPrimaryKey(Integer id);
+
+    PageInfo<Staff> queryAllByPage(Integer pageNum, Integer pageSize);
 }

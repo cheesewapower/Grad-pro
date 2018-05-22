@@ -4,6 +4,7 @@ import com.example.demo.entity.House;
 import com.example.demo.entity.HouseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface HouseMapper {
     int countByExample(HouseExample example);
@@ -27,4 +28,6 @@ public interface HouseMapper {
     int updateByPrimaryKeySelective(House record);
 
     int updateByPrimaryKey(House record);
+
+    List<House> queryAllByPage(@Param("rowBounds") RowBounds rowBounds);
 }
