@@ -8,7 +8,7 @@
 
     <div>
       <Page :style="{textAlign:'center',marginTop:'10px'}":total="total" :page-size-opts="page_opts" :current="page" :page-size="page_size"
-
+            v-on:on-change="pageChange" v-on:on-page-size-change="pageSizeChange"
             show-sizer show-total show-elevator></Page>
 
 
@@ -65,30 +65,112 @@
             {
               title: '所属楼盘',
               key: 'buildingid'
-            }
-          ],
-          created: function () {
-            this.axios.get("api/house/findAllByPage",{
-              params: {
-                pageNum:1,
-                pageSize:10
+            },
+            {
+              title: 'Action',
+              key: 'action',
+              width: 150,
+              align: 'center',
+              render: (h, params) => {
+                return h('div', [
+                  h('Button', {
+                    props: {
+                      type: 'primary',
+                      size: 'small'
+                    },
+                    style: {
+                      marginRight: '5px'
+                    },
+                    on: {
+                      click: () => {
+                        this.show(params.index)
+                      }
+                    }
+                  }, '编辑'),
+                  h('Button', {
+                    props: {
+                      type: 'error',
+                      size: 'small'
+                    },
+                    on: {
+                      click: () => {
+                        this.remove(params)
+                      }
+                    }
+                  }, '删除')
+                ]);
               }
+            }
 
-            })
-              .then(response => {
-                console.log(response);
-                this.rows=response.data.list;
-                this.total=response.data.total;
-              })
-          },
-          methods: {
+          ],
 
-
-          }
 
 
         }
       },
+      created: function () {
+        this.axios.get("api/house/findAllByPage",{
+          params: {
+            pageNum:1,
+            pageSize:10
+          }
+
+        })
+          .then(response => {
+             console.log(response);
+            this.rows=response.data.list;
+            this.total=response.data.total;
+          })
+      },
+      methods: {
+        pageChange:function (e) {
+
+          this.axios.get("api/house/findAllByPage",{
+            params: {
+              pageNum:e,
+              pageSize:this.page_size
+            }
+          }).then(response => {
+            this.rows=response.data.list;
+            this.total=response.data.total;
+          })
+
+
+        },
+        pageSizeChange:function (e) {
+          this.axios.get("api/house/findAllByPage",{
+            params: {
+              pageNum:this.page,
+              pageSize:e
+            }
+          }).then(response => {
+            this.rows=response.data.list;
+            this.total=response.data.total;
+          })
+
+        },
+        show (index) {
+          this.$Modal.info({
+            title: 'User Info',
+            content: `Name：${this.columns1[index].name}<br>Age：${this.columns1[index].age}<br>Address：${this.columns1[index].address}`
+          })
+        },
+        remove (params) {
+          console.log(params);
+          this.axios.delete("api/house/deleteByPrimaryKey",{
+            params: {
+            id:params.row.id
+            }
+          }).then(response => {
+           console.log(response);
+
+          })
+
+        }
+
+
+      }
+
     }
 </script>
 

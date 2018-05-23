@@ -9,7 +9,7 @@
     <result column="houseSellDate" property="houseselldate" jdbcType="TIMESTAMP" />
     <result column="houseYear" property="houseyear" jdbcType="INTEGER" />
     <result column="houseSize" property="housesize" jdbcType="DOUBLE" />
-    <result column="hosueCq" property="hosuecq" jdbcType="VARCHAR" />
+    <result column="houseCq" property="housecq" jdbcType="VARCHAR" />
     <result column="houseStatus" property="housestatus" jdbcType="INTEGER" />
     <result column="houseSeller" property="houseseller" jdbcType="INTEGER" />
     <result column="housePrice" property="houseprice" jdbcType="INTEGER" />

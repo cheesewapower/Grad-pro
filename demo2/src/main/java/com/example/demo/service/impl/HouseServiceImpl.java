@@ -19,4 +19,10 @@ public class HouseServiceImpl implements HouseService{
         PageInfo<House> p=new PageInfo(houseMapper.queryAllByPage(rowBounds));
         return p;
     }
+
+    @Override
+    public Integer deleteByPrimaryKey(Integer id) {
+        return houseMapper.deleteByPrimaryKey(id);
+    }
+
 }

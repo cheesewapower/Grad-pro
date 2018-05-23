@@ -5,4 +5,6 @@ import com.github.pagehelper.PageInfo;
 
 public interface HouseService {
     PageInfo<House> queryAllByPage(Integer pageNum, Integer pageSize);
+
+    Integer deleteByPrimaryKey(Integer id);
 }

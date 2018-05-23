@@ -17,7 +17,7 @@ public class House {
 
     private Double housesize;
 
-    private String hosuecq;
+    private String housecq;
 
     private Integer housestatus;
 
@@ -83,12 +83,12 @@ public class House {
         this.housesize = housesize;
     }
 
-    public String getHosuecq() {
-        return hosuecq;
+    public String getHousecq() {
+        return housecq;
     }
 
-    public void setHosuecq(String hosuecq) {
-        this.hosuecq = hosuecq == null ? null : hosuecq.trim();
+    public void setHousecq(String housecq) {
+        this.housecq = housecq == null ? null : housecq.trim();
     }
 
     public Integer getHousestatus() {
