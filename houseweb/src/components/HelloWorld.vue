@@ -58,8 +58,8 @@
               <Icon type="ios-analytics"></Icon>
               房屋销售
             </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
+            <router-link to="/sellinghouse"> <MenuItem name="3-1">待售房信息</MenuItem></router-link>
+            <router-link to="/soldhouse"> <MenuItem name="3-2">已售房管理</MenuItem></router-link>
           </Submenu>
         </Menu>
       </Sider>

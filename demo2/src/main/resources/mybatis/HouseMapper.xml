@@ -20,7 +20,34 @@
     SELECT * from house ORDER  BY id ASC
   </select>
 
-  <sql id="Example_Where_Clause" >
+    <select id="querySellingByPage" resultMap="BaseResultMap">
+       SELECT * from house h WHERE h.housestatus= 0 ORDER  BY id ASC
+    </select>
+
+  <select id="querySoldByPage" resultMap="BaseResultMap">
+    SELECT * from house h WHERE h.housestatus= 1 ORDER  BY id ASC
+  </select>
+
+    <select id="searchSellingHouse" resultMap="BaseResultMap">
+        select * from house
+        <where>
+            <if test='keyword!=null'>
+                housesn like "%"#{keyword}"%"
+            </if>
+        </where>
+    </select>
+
+  <select id="checkOutById" resultMap="BaseResultMap">
+   UPDATE house SET houseStatus = 0 , buyId=NULL , buyName =NULL , houseSellDate =NULL WHERE id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="checkOutById2" resultMap="BaseResultMap">
+    DELETE  FROM buyer WHERE houseid =  #{id,jdbcType=INTEGER}
+  </select>
+
+
+
+
+    <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
         <if test="criteria.valid" >

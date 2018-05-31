@@ -13,6 +13,10 @@ public interface HouseMapper {
 
     int deleteByPrimaryKey(Integer id);
 
+    void checkOutById(Integer id);
+    //两个sql语句
+    void checkOutById2(Integer id);
+
     int insert(House record);
 
     int insertSelective(House record);
@@ -30,4 +34,14 @@ public interface HouseMapper {
     int updateByPrimaryKey(House record);
 
     List<House> queryAllByPage(@Param("rowBounds") RowBounds rowBounds);
+
+    List<House> querySellingByPage(@Param("rowBounds") RowBounds rowBounds);
+
+    List<House> querySoldByPage(@Param("rowBounds") RowBounds rowBounds);
+
+
+
+    List<House> searchSellingHouse(@Param("rowBounds") RowBounds rowBounds,@Param("keyword")String keyword);
+
+
 }

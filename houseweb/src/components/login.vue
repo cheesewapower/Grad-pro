@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import Cookies from 'js-cookie';
+  //import Cookies from 'js-cookie';
   export default {
     name:'login',
     data () {
@@ -82,6 +82,36 @@
   };
 </script>
 
-<style scoped>
 
+
+<style scoped lang="less">
+  .login{
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/login_back.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    &-con{
+      position: absolute;
+      right: 160px;
+      top: 50%;
+      transform: translateY(-60%);
+      width: 300px;
+      &-header{
+        font-size: 16px;
+        font-weight: 300;
+        text-align: center;
+        padding: 30px 0;
+      }
+      .form-con{
+        padding: 10px 0 0;
+      }
+      .login-tip{
+        font-size: 10px;
+        text-align: center;
+        color: #c3c3c3;
+      }
+    }
+  }
 </style>

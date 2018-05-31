@@ -149,12 +149,7 @@
           })
 
         },
-        show (index) {
-          this.$Modal.info({
-            title: 'User Info',
-            content: `Name：${this.columns1[index].name}<br>Age：${this.columns1[index].age}<br>Address：${this.columns1[index].address}`
-          })
-        },
+
         remove (params) {
           console.log(params);
           this.axios.delete("api/house/deleteByPrimaryKey",{
