@@ -56,7 +56,19 @@
             },
             {
               title: '房屋状态',
-              key: 'housestatus'
+              key: 'housestatus',
+              render: (h, params) => {
+                let _this = this;
+                let texts = '';
+                if (params.row.housestatus == 0) {
+                  texts = "待售中"
+                } else if (params.row.housestatus == 1) {
+                  texts = "已售出"
+                }
+                return h('div', {
+                  props: {},
+                }, texts)
+              }
             },
             {
               title: '房屋售价',
@@ -157,7 +169,18 @@
             id:params.row.id
             }
           }).then(response => {
-           console.log(response);
+            this.axios.get("api/house/findAllByPage",{
+              params: {
+                pageNum:1,
+                pageSize:10
+              }
+
+            })
+              .then(response => {
+                console.log(response);
+                this.rows=response.data.list;
+                this.total=response.data.total;
+              })
 
           })
 

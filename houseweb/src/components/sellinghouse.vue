@@ -78,17 +78,15 @@
             title: '房产证号',
             key: 'housecq'
           },
-          {
-            title: '房屋状态',
-            key: 'housestatus'
-          },
+
           {
             title: '房屋售价',
             key: 'houseprice'
           },
           {
             title: '所属楼盘',
-            key: 'buildingid'
+            key: 'buildingid',
+
           },
 
 

@@ -61,9 +61,10 @@
           {
             title: '交易时间',
             key: 'houseselldate',
+            width: 150,
             render: function (h, params) {
               return h('div',
-                new Date(this.row.houseselldate).Format('yyyy-MM-dd '));/*这里的this.row能够获取当前行的数据*/
+                new Date(this.row.houseselldate).Format('yyyy-MM-dd hh:mm'));/*这里的this.row能够获取当前行的数据*/
             }
           },
           {
@@ -87,19 +88,27 @@
             key: 'action',
             width: 150,
             align: 'center',
-            render: (h, params) => {
+            render: (h, params)=> {
               return h('div', [
-                h('Button', {
-                  props: {
-                    type: 'error',
-                    size: 'small'
-                  },
-                  on: {
-                    click: () => {
-                      this.remove(params)
+                h('Button', [
+                  h('Poptip', {
+                    props: {
+                      confirm: true,
+                      title: '确定要将该房推退掉吗！',
+                      type: 'error',
+                      size: 'small'
+                    },
+                    on: {
+                      'on-ok': () => {
+                        this.remove(params)
+                      },
+                      'on-cancel': () => {
+                        this.cancel(params)
+
+                      }
                     }
-                  }
-                }, '退房')
+                  }, '退房')
+                ])
               ]);
             }
           }
@@ -136,6 +145,8 @@
 
     },
     methods: {
+
+
       pageChange:function (e) {
 
         this.axios.get("api/house/querySoldByPage",{
@@ -163,20 +174,39 @@
 
       },
       remove (params) {
+        console.log("111");
         this.axios.delete("api/house/checkOutById",{
           params: {
             id:params.row.id
           }
         }).then(response => {
-           console.log(response)
+          //刷新
+          this.axios.get("api/house/querySoldByPage",{
+            params: {
+              pageNum:1,
+              pageSize:10
+            }
+
+          })
+            .then(response => {
+              console.log(response);
+              this.rows=response.data.list;
+              this.total=response.data.total;
+            })
+
+          this.initFormatter();                  // 为Date 对象添加Format方法
 
         })
 
+
+
+      },
+      cancel(params){
+        console.log(params);
       },
 
-      formatDate(timestramp){
-        return new Date(timestramp).Format('yyyy-MM-dd');
-      },
+
+
       initFormatter(){
         Date.prototype.Format = function(fmt) { //
           let o = {

@@ -13,6 +13,14 @@
     <result column="buyPhone" property="buyphone" jdbcType="VARCHAR" />
     <result column="buyType" property="buytype" jdbcType="INTEGER" />
   </resultMap>
+  
+  
+  <select id="queryAllByType" resultMap="BaseResultMap">
+
+    SELECT  *  FROM  buyer WHERE buytype = #{buytype}
+
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

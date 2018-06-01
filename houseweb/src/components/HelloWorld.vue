@@ -49,9 +49,9 @@
               <Icon type="ios-keypad"></Icon>
               客户关系
             </template>
-            <MenuItem name="2-1">一般客户</MenuItem>
-            <MenuItem name="2-2">预约客户</MenuItem>
-            <MenuItem name="2-3">购房客户</MenuItem>
+            <router-link to="/generalbuyer">   <MenuItem name="2-1">一般客户</MenuItem></router-link>
+              <router-link to="/prebuyer">  <MenuItem name="2-2">预约客户</MenuItem></router-link>
+                <router-link to="/buyer">  <MenuItem name="2-3">购房客户</MenuItem></router-link>
           </Submenu>
           <Submenu name="3">
             <template slot="title">
@@ -60,6 +60,13 @@
             </template>
             <router-link to="/sellinghouse"> <MenuItem name="3-1">待售房信息</MenuItem></router-link>
             <router-link to="/soldhouse"> <MenuItem name="3-2">已售房管理</MenuItem></router-link>
+          </Submenu>
+          <Submenu name="4">
+            <template slot="title">
+              <Icon type="clipboard"></Icon>
+              销售统计
+            </template>
+            <router-link to="/statistics"> <MenuItem name="4-1">统计报表</MenuItem></router-link>
           </Submenu>
         </Menu>
       </Sider>
