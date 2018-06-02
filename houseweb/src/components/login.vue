@@ -1,5 +1,5 @@
 <template>
-  <div class="login" @keydown.enter="handleSubmit" >
+  <div class="login" @keydown.enter="handleSubmit">
     <div class="login-con">
       <Card :bordered="false">
         <p slot="title">
@@ -35,43 +35,44 @@
 <script>
   //import Cookies from 'js-cookie';
   export default {
-    name:'login',
-    data () {
+    name: 'login',
+    data() {
       return {
         form: {
           username: '',
           password: '',
-          type:1
+          type: 1
         },
         rules: {
           username: [
-            { required: true, message: '账号不能为空', trigger: 'blur' }
+            {required: true, message: '账号不能为空', trigger: 'blur'}
           ],
           password: [
-            { required: true, message: '密码不能为空', trigger: 'blur' }
+            {required: true, message: '密码不能为空', trigger: 'blur'}
           ]
         }
       };
     },
     methods: {
-      handleSubmit () {
-        var that=this;
+      handleSubmit() {
+        var that = this;
         this.$refs.form.validate((valid) => {
           if (valid) {
             this.axios.get('/api/auth/login',
               {
-                params: this.form}).then((res) => {
+                params: this.form
+              }).then((res) => {
               Cookies.set('user', res.data.user);
               Cookies.set('token', res.data.token);
-              this.$store.commit('login',res.data)
+              this.$store.commit('login', res.data)
               this.$router.push({
                 name: 'found',
-                params: { page: 1,rows:20 }
+                params: {page: 1, rows: 20}
               })
-            }).catch(function(err){
-              if(err.response.status==602||err.response.status==601){
+            }).catch(function (err) {
+              if (err.response.status == 602 || err.response.status == 601) {
                 that.$Message.error('用户名或密码错误');
-              }else{
+              } else {
                 that.$Message.error('登录失败');
               }
             })
@@ -83,31 +84,30 @@
 </script>
 
 
-
 <style scoped lang="less">
-  .login{
+  .login {
     width: 100%;
     height: 100%;
     background-image: url('../assets/login_back.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
-    &-con{
+    &-con {
       position: absolute;
       right: 160px;
       top: 50%;
       transform: translateY(-60%);
       width: 300px;
-      &-header{
+      &-header {
         font-size: 16px;
         font-weight: 300;
         text-align: center;
         padding: 30px 0;
       }
-      .form-con{
+      .form-con {
         padding: 10px 0 0;
       }
-      .login-tip{
+      .login-tip {
         font-size: 10px;
         text-align: center;
         color: #c3c3c3;

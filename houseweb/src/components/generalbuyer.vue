@@ -7,21 +7,78 @@
           <span>一般客户管理</span>
         </div>
       </Header>
+    </div> <Modal
+    v-model="modaladd"
+    title="记录客户信息"
+    @on-ok="asyncOK"
+    @on-cancel="cancel">
+    <div class="form-con">
+
+      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+        <FormItem label="客户类型" prop="buytype">
+          <Select v-model="formValidate.buytype" placeholder="">
+            <Option value="0">一般客户</Option>
+            <Option value="1">预购客户</Option>
+            <Option value="2">购房客户</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="客户姓名" prop="buyname">
+          <Input v-model="formValidate.buyname" placeholder="输入客户姓名"></Input>
+        </FormItem>
+        <FormItem label="客户身份证" prop="buysti">
+          <Input v-model="formValidate.buysti" placeholder="输入客户身份证号"></Input>
+        </FormItem>
+
+        <FormItem label="客户户籍" prop="buyhj">
+          <Input v-model="formValidate.buyhj" placeholder="输入客户户籍"></Input>
+        </FormItem>
+        <FormItem label="客户收入" prop="buyincome">
+          <Input v-model="formValidate.buyincome" placeholder="输入客户年收入"></Input>
+        </FormItem>
+        <FormItem label="联系方式" prop="buyphone">
+          <Input v-model="formValidate.buyphone" placeholder="输入客户联系方式"></Input>
+        </FormItem>
+        <FormItem label="房屋id" prop="houseid">
+          <Input v-model="formValidate.houseid" placeholder="输入购买房屋id"></Input>
+        </FormItem>
+
+        <FormItem label="Date">
+          <Row>
+            <Col span="11">
+              <FormItem prop="date">
+                <DatePicker type="date" placeholder="选择日期" v-model="formValidate.date"></DatePicker>
+              </FormItem>
+            </Col>
+            <Col span="2" style="text-align: center">-</Col>
+            <Col span="11">
+              <FormItem prop="time">
+                <TimePicker type="time" placeholder="选择时间" v-model="formValidate.time"></TimePicker>
+              </FormItem>
+            </Col>
+          </Row>
+        </FormItem>
+        <FormItem label="备注" prop="buydesc">
+          <Input v-model="formValidate.buydesc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入详情"></Input>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+          <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+        </FormItem>
+      </Form>
+
+
+
     </div>
 
-    <div id="addbuyer">
-    <Button type="primary" v-on:click="add">新增</Button>
-    </div>
-<div>
+
+  </Modal>
+
+
+
+<div id="addbuyer">
   <template>
-    <Button type="primary" @click="modal6 = true">新增</Button>
-    <Modal
-      v-model="modal6"
-      title="Title"
-      :loading="loading"
-      @on-ok="asyncOK">
-      <p>After you click ok, the dialog box will close in 2 seconds.</p>
-    </Modal>
+    <Button type="primary" @click="modaladd = true">新增</Button>
+
   </template>
 </div>
 
@@ -44,14 +101,38 @@
         name: "generalbuyer",
       data () {
         return {
+          formValidate: {
+            buyname: '',
+            buysti: '',
+            buytype: '',
+            date: '',
+            time: '',
+            buydesc: '',
+            houseid:'',
+            buyincome:'',
+            buyhj:'',
+            buyphone:'',
+          },
+          ruleValidate: {
+            buyname: [
+              { required: true, message: '姓名不能为空', trigger: 'blur' }
+            ],
+            buytype: [
+              { required: true, message: '选择客户类型', trigger: 'change' }
+            ],
+            buydesc: [
+              { required: true, message: '请输入备注信息', trigger: 'blur' },
+              { type: 'string', min: 10, message: '请输入至少10个字', trigger: 'blur' }
+            ],
+
+          },
           total:100,
           page:1,
           page_size:10,
           page_opts:[10,20,50],
           buytype:0,
           rows:[],
-          modal6: false,
-          loading: true,
+          modaladd: false,
           columns1: [
             {
               title: 'ID',
@@ -201,14 +282,56 @@
           }
         },
 
-        add: ()=>{
-          console.log("111");
-    },
+
         asyncOK () {
-          setTimeout(() => {
-            this.modal6 = false;
-          }, 2000);
-        }
+
+        },
+
+        cancel () {
+
+        },
+
+          handleSubmit (name) {
+            this.$refs[name].validate((valid) => {
+              if (valid) {
+               console.log(new Date(this.formValidate.date).Format('yyyy-MM-dd ')+this.formValidate.time);
+                this.axios.post("api/buyer/insert",{
+
+                    buyname:this.formValidate.buyname,
+                    buysti:this.formValidate.buysti,
+                    buydate:new Date(new Date(this.formValidate.date).Format('yyyy-MM-dd ')+this.formValidate.time).getTime(),
+                    houseid:this.formValidate.houseid,
+                    buyincome:this.formValidate.buyincome,
+                    buydesc:this.formValidate.buydesc,
+                    buyhj:this.formValidate.buyhj,
+                    buyphone:this.formValidate.buyphone,
+                    buytype:this.formValidate.buytype,
+
+                }).then(response => {
+                  this.modaladd=false;
+                  this.axios.get("api/buyer/queryAllByType",{
+                    params: {
+                      pageNum:1,
+                      pageSize:10,
+                      buytype:0
+                    }
+                  }).then(response => {
+
+                    this.rows=response.data.list;
+                    this.total=response.data.total;
+                  })
+                })
+
+              } else {
+                this.$Message.error('Fail!');
+
+              }
+            })
+          },
+          handleReset (name) {
+            this.$refs[name].resetFields();
+
+          }
 
 
       }

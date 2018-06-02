@@ -8,4 +8,8 @@ public interface BuyerService {
     PageInfo<Buyer> queryAllByType(Integer pageNum, Integer pageSize, Integer buytype);
 
     Integer deleteByPrimaryKey(Integer id);
+
+    Integer insert(Buyer buyer);
+
+    int updateByPrimaryKeySelective(Buyer record);
 }

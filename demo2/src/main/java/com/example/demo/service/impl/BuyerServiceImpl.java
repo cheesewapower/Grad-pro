@@ -23,4 +23,14 @@ public class BuyerServiceImpl implements BuyerService {
     public Integer deleteByPrimaryKey(Integer id) {
         return buyerMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public Integer insert(Buyer buyer) {
+        return buyerMapper.insert(buyer);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Buyer record) {
+        return buyerMapper.updateByPrimaryKeySelective(record);
+    }
 }

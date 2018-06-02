@@ -19,6 +19,27 @@
             show-sizer show-total show-elevator></Page>
     </div>
 
+    <div>
+
+      <Modal
+        v-model="modalup"
+        title="升级为购房客户"
+        @on-ok="asyncOK"
+        @on-cancel="cancel">
+        <div class="form-con">
+          <Form ref="formValidate"   :label-width="80">
+            <FormItem label="备注" prop="buydesc">
+              <Input v-model="desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入详情"></Input>
+            </FormItem>
+            <FormItem>
+              <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+    </div>
+
 
   </div>
 </template>
@@ -28,6 +49,9 @@
     name: "prebuyer",
     data () {
       return {
+        desc:'',
+        buyid:'',
+        modalup: false,
         total:100,
         page:1,
         page_size:10,
@@ -76,6 +100,32 @@
             title: '备注',
             key: 'buydesc'
           },
+          {
+            title: 'Action',
+            key: 'action',
+            width: 150,
+            align: 'center',
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'primary',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.modalup=true;
+                   this.desc=params.row.buydesc;
+                   this.buyid=params.row.id;
+                    }
+                  }
+                }, '升级'),
+              ]);
+            }
+          }
         ],
 
 
@@ -116,6 +166,27 @@
         })
 
       },
+      asyncOK () {
+
+      },
+
+      cancel () {
+
+      },
+
+      handleSubmit: function (name) {
+        this.axios.put("api/buyer/updateByPrimaryKeySelective", {
+          id: this.buyid,
+          buydesc: this.desc,
+          buytype:2
+
+        }).then(response => {
+          this.modalup=false,
+          this.rows = response.data.list;
+          this.total = response.data.total;
+        })
+      },
+
 
       initFormatter(){
         Date.prototype.Format = function(fmt) { //

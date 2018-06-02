@@ -5,6 +5,15 @@
     </div>
 
     <div>
+      <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
+        <div :style= "{fontSize:'16px'}"   class="title">
+
+          <span>统计报表</span>
+        </div>
+      </Header>
+    </div>
+
+    <div>
       <Affix :offset-top="65" style="padding: 0">
         <div class="search">
           <Row>
