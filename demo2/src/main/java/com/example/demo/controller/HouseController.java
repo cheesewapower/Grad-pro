@@ -47,6 +47,10 @@ public class HouseController {
         houseService.checkOutById2(id);
     }
 
-
+    @GetMapping(value = "/statistics")
+    public Object statistics(@RequestParam("startDate")  String startDate,
+                                     @RequestParam("endDate")  String endDate){
+        return houseService.statistics(startDate,endDate);
+    }
 }
 

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.Calcu;
 import com.example.demo.entity.House;
 import com.example.demo.mapper.HouseMapper;
 import com.example.demo.service.HouseService;
@@ -55,6 +56,11 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public void checkOutById2(Integer id) {
          houseMapper.checkOutById2(id);
+    }
+
+    @Override
+    public Calcu statistics(String startDate, String endDate) {
+        return houseMapper.statistics(startDate,endDate);
     }
 
 }

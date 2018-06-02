@@ -44,6 +44,10 @@
     DELETE  FROM buyer WHERE houseid =  #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="statistics" resultType="com.example.demo.dto.Calcu">
+    SELECT SUM(houseprice) as sum,COUNT(houseSn) as count FROM house
+     WHERE houseStatus =1 and houseSellDate BETWEEN  #{startDate} and #{endDate}
+  </select>
 
 
 

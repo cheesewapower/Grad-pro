@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.dto.Calcu;
 import com.example.demo.entity.House;
 import com.example.demo.entity.HouseExample;
 import java.util.List;
@@ -42,6 +43,8 @@ public interface HouseMapper {
 
 
     List<House> searchSellingHouse(@Param("rowBounds") RowBounds rowBounds,@Param("keyword")String keyword);
+
+    Calcu statistics(@Param("startDate")String startDate, @Param("endDate")String endDate);
 
 
 }
