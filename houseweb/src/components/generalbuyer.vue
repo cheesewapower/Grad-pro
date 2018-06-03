@@ -139,7 +139,8 @@
           columns1: [
             {
               title: 'ID',
-              key: 'id'
+              key: 'id',
+              width: 60,
             },
             {
               title: '客户姓名',
@@ -176,12 +177,13 @@
             },
             {
               title: '备注',
-              key: 'buydesc'
+              key: 'buydesc',
+              width: 150,
             },
             {
               title: 'Action',
               key: 'action',
-              width: 150,
+
               align: 'center',
               render: (h, params) => {
                 return h('div', [

@@ -4,7 +4,7 @@
       <Card :bordered="false">
         <p slot="title">
           <Icon type="log-in"></Icon>
-          欢迎登录
+          欢迎登录管理系统
         </p>
         <div class="form-con">
           <Form ref="form" :model="form" :rules="rules">
@@ -58,24 +58,7 @@
         var that = this;
         this.$refs.form.validate((valid) => {
           if (valid) {
-            this.axios.get('/api/auth/login',
-              {
-                params: this.form
-              }).then((res) => {
-              Cookies.set('user', res.data.user);
-              Cookies.set('token', res.data.token);
-              this.$store.commit('login', res.data)
-              this.$router.push({
-                name: 'found',
-                params: {page: 1, rows: 20}
-              })
-            }).catch(function (err) {
-              if (err.response.status == 602 || err.response.status == 601) {
-                that.$Message.error('用户名或密码错误');
-              } else {
-                that.$Message.error('登录失败');
-              }
-            })
+
           }
         });
       }

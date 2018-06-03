@@ -32,9 +32,10 @@
         select * from house
         <where>
             <if test='keyword!=null'>
-                housesn like "%"#{keyword}"%"
+                housesn like "%"#{keyword}"%"  AND housestatus = 0
             </if>
         </where>
+
     </select>
 
   <select id="checkOutById" resultMap="BaseResultMap">
