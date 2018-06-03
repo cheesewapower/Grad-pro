@@ -10,8 +10,7 @@
     </div> <Modal
     v-model="modaladd"
     title="记录客户信息"
-    @on-ok="asyncOK"
-    @on-cancel="cancel">
+    >
     <div class="form-con">
 
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
@@ -60,16 +59,16 @@
         <FormItem label="备注" prop="buydesc">
           <Input v-model="formValidate.buydesc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入详情"></Input>
         </FormItem>
-        <FormItem>
-          <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
-          <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
-        </FormItem>
+
       </Form>
 
 
 
     </div>
-
+    <div slot="footer">
+      <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+      <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+    </div>
 
   </Modal>
 
@@ -133,6 +132,10 @@
           buytype:0,
           rows:[],
           modaladd: false,
+          houseselldate:'',
+          id:'',
+          housestatus:'',
+
           columns1: [
             {
               title: 'ID',
@@ -283,44 +286,49 @@
         },
 
 
-        asyncOK () {
 
+
+        addbuyer() {
+          return this.axios.post("api/buyer/insert",{
+            buyname:this.formValidate.buyname,
+            buysti:this.formValidate.buysti,
+            buydate:new Date(new Date(this.formValidate.date).Format('yyyy-MM-dd ')+this.formValidate.time).getTime(),
+            houseid:this.formValidate.houseid,
+            buyincome:this.formValidate.buyincome,
+            buydesc:this.formValidate.buydesc,
+            buyhj:this.formValidate.buyhj,
+            buyphone:this.formValidate.buyphone,
+            buytype:this.formValidate.buytype,
+
+          })
         },
-
-        cancel () {
-
+        updatehouse(){
+          return this.axios.put("api/house/updateByPrimaryKeySelective",{
+            buyname:this.formValidate.buyname,
+            houseselldate:new Date(new Date(this.formValidate.date).Format('yyyy-MM-dd ')+this.formValidate.time).getTime(),
+            id:this.formValidate.houseid,
+            housestatus:1,
+          })
         },
 
           handleSubmit (name) {
             this.$refs[name].validate((valid) => {
               if (valid) {
-               console.log(new Date(this.formValidate.date).Format('yyyy-MM-dd ')+this.formValidate.time);
-                this.axios.post("api/buyer/insert",{
+                this.axios.all([this.addbuyer(), this.updatehouse()])
+                  .then(this.axios.spread( (acct, perms) => {
+                    this.modaladd=false;
+                    this.axios.get("api/buyer/queryAllByType",{
+                      params: {
+                        pageNum:1,
+                        pageSize:10,
+                        buytype:0
+                      }
+                    }).then(response => {
+                      this.rows=response.data.list;
+                      this.total=response.data.total;
+                    })
+                  }));
 
-                    buyname:this.formValidate.buyname,
-                    buysti:this.formValidate.buysti,
-                    buydate:new Date(new Date(this.formValidate.date).Format('yyyy-MM-dd ')+this.formValidate.time).getTime(),
-                    houseid:this.formValidate.houseid,
-                    buyincome:this.formValidate.buyincome,
-                    buydesc:this.formValidate.buydesc,
-                    buyhj:this.formValidate.buyhj,
-                    buyphone:this.formValidate.buyphone,
-                    buytype:this.formValidate.buytype,
-
-                }).then(response => {
-                  this.modaladd=false;
-                  this.axios.get("api/buyer/queryAllByType",{
-                    params: {
-                      pageNum:1,
-                      pageSize:10,
-                      buytype:0
-                    }
-                  }).then(response => {
-
-                    this.rows=response.data.list;
-                    this.total=response.data.total;
-                  })
-                })
 
               } else {
                 this.$Message.error('Fail!');
@@ -334,7 +342,9 @@
           }
 
 
-      }
+      },
+
+
 
     }
 </script>

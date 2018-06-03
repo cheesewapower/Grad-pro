@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.House;
 import com.example.demo.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +53,10 @@ public class HouseController {
                                      @RequestParam("endDate")  String endDate){
         return houseService.statistics(startDate,endDate);
     }
+    @PutMapping(value="updateByPrimaryKeySelective")
+    public Integer updateByPrimaryKeySelective(@RequestBody House record){
+        return houseService.updateByPrimaryKeySelective(record);
+    }
+
 }
 

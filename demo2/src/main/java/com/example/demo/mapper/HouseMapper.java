@@ -30,7 +30,7 @@ public interface HouseMapper {
 
     int updateByExample(@Param("record") House record, @Param("example") HouseExample example);
 
-    int updateByPrimaryKeySelective(House record);
+    int updateByPrimaryKeySelective(House house);
 
     int updateByPrimaryKey(House record);
 

@@ -63,4 +63,9 @@ public class HouseServiceImpl implements HouseService{
         return houseMapper.statistics(startDate,endDate);
     }
 
+    @Override
+    public int updateByPrimaryKeySelective(House house) {
+        return houseMapper.updateByPrimaryKeySelective(house);
+    }
+
 }

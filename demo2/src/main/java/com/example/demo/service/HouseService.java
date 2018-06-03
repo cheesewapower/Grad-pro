@@ -21,4 +21,6 @@ public interface HouseService {
     void checkOutById2(Integer id);
 
     Calcu statistics(String startDate, String endDate);
+
+    int updateByPrimaryKeySelective(House house);
 }

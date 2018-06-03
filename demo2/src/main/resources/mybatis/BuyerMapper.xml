@@ -112,7 +112,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  
+
   <insert id="insert" parameterType="com.example.demo.entity.Buyer" >
     insert into buyer (id, buyName, buySti, 
       buyDate, houseId, buyIncome, 
@@ -123,6 +123,9 @@
       #{buydesc,jdbcType=VARCHAR}, #{buyhj,jdbcType=VARCHAR}, #{buyphone,jdbcType=VARCHAR}, 
       #{buytype,jdbcType=INTEGER})
   </insert>
+
+
+
 
   <insert id="insertSelective" parameterType="com.example.demo.entity.Buyer" >
     insert into buyer

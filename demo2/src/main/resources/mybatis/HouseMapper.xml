@@ -110,7 +110,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, houseSn, buyId, buyName, houseSellDate, houseYear, houseSize, hosueCq, houseStatus, 
+    id, houseSn, buyId, buyName, houseSellDate, houseYear, houseSize, houseCq, houseStatus, 
     houseSeller, housePrice, buildingId
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.HouseExample" >
@@ -146,12 +146,12 @@
   <insert id="insert" parameterType="com.example.demo.entity.House" >
     insert into house (id, houseSn, buyId, 
       buyName, houseSellDate, houseYear, 
-      houseSize, hosueCq, houseStatus, 
+      houseSize, houseCq, houseStatus, 
       houseSeller, housePrice, buildingId
       )
     values (#{id,jdbcType=INTEGER}, #{housesn,jdbcType=VARCHAR}, #{buyid,jdbcType=INTEGER}, 
       #{buyname,jdbcType=VARCHAR}, #{houseselldate,jdbcType=TIMESTAMP}, #{houseyear,jdbcType=INTEGER}, 
-      #{housesize,jdbcType=DOUBLE}, #{hosuecq,jdbcType=VARCHAR}, #{housestatus,jdbcType=INTEGER}, 
+      #{housesize,jdbcType=DOUBLE}, #{housecq,jdbcType=VARCHAR}, #{housestatus,jdbcType=INTEGER}, 
       #{houseseller,jdbcType=INTEGER}, #{houseprice,jdbcType=INTEGER}, #{buildingid,jdbcType=INTEGER}
       )
   </insert>
@@ -179,8 +179,8 @@
       <if test="housesize != null" >
         houseSize,
       </if>
-      <if test="hosuecq != null" >
-        hosueCq,
+      <if test="housecq != null" >
+        houseCq,
       </if>
       <if test="housestatus != null" >
         houseStatus,
@@ -217,8 +217,8 @@
       <if test="housesize != null" >
         #{housesize,jdbcType=DOUBLE},
       </if>
-      <if test="hosuecq != null" >
-        #{hosuecq,jdbcType=VARCHAR},
+      <if test="housecq != null" >
+        #{housecq,jdbcType=VARCHAR},
       </if>
       <if test="housestatus != null" >
         #{housestatus,jdbcType=INTEGER},
@@ -264,8 +264,8 @@
       <if test="record.housesize != null" >
         houseSize = #{record.housesize,jdbcType=DOUBLE},
       </if>
-      <if test="record.hosuecq != null" >
-        hosueCq = #{record.hosuecq,jdbcType=VARCHAR},
+      <if test="record.housecq != null" >
+        houseCq = #{record.housecq,jdbcType=VARCHAR},
       </if>
       <if test="record.housestatus != null" >
         houseStatus = #{record.housestatus,jdbcType=INTEGER},
@@ -293,7 +293,7 @@
       houseSellDate = #{record.houseselldate,jdbcType=TIMESTAMP},
       houseYear = #{record.houseyear,jdbcType=INTEGER},
       houseSize = #{record.housesize,jdbcType=DOUBLE},
-      hosueCq = #{record.hosuecq,jdbcType=VARCHAR},
+      houseCq = #{record.housecq,jdbcType=VARCHAR},
       houseStatus = #{record.housestatus,jdbcType=INTEGER},
       houseSeller = #{record.houseseller,jdbcType=INTEGER},
       housePrice = #{record.houseprice,jdbcType=INTEGER},
@@ -323,8 +323,8 @@
       <if test="housesize != null" >
         houseSize = #{housesize,jdbcType=DOUBLE},
       </if>
-      <if test="hosuecq != null" >
-        hosueCq = #{hosuecq,jdbcType=VARCHAR},
+      <if test="housecq != null" >
+        houseCq = #{housecq,jdbcType=VARCHAR},
       </if>
       <if test="housestatus != null" >
         houseStatus = #{housestatus,jdbcType=INTEGER},
@@ -349,7 +349,7 @@
       houseSellDate = #{houseselldate,jdbcType=TIMESTAMP},
       houseYear = #{houseyear,jdbcType=INTEGER},
       houseSize = #{housesize,jdbcType=DOUBLE},
-      hosueCq = #{hosuecq,jdbcType=VARCHAR},
+      houseCq = #{housecq,jdbcType=VARCHAR},
       houseStatus = #{housestatus,jdbcType=INTEGER},
       houseSeller = #{houseseller,jdbcType=INTEGER},
       housePrice = #{houseprice,jdbcType=INTEGER},
