@@ -23,7 +23,7 @@
               </Input>
             </FormItem>
             <FormItem>
-              <Button @click="handleSubmit" type="primary" long>登录</Button>
+              <router-link to="/">  <Button  type="primary" long>登录</Button></router-link>
             </FormItem>
           </Form>
         </div>
