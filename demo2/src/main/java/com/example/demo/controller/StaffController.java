@@ -22,5 +22,13 @@ public class StaffController {
                                 @RequestParam("pageSize") int pageSize){
         return staffService.queryAllByPage(pageNum,pageSize);
     }
+    @PostMapping(value = "/insertSelective")
+    public Object findAllByPage(@RequestBody Staff record){
+        return staffService.insertSelective(record);
+    }
+    @DeleteMapping(value = "/deleteByPrimaryKey")
+    public Object deleteByPrimaryKey(@RequestParam(name = "id", required = false) int id){
+        return staffService.deleteByPrimaryKey(id);
+    }
 }
 

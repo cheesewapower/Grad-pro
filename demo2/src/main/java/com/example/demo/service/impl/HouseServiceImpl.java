@@ -68,4 +68,9 @@ public class HouseServiceImpl implements HouseService{
         return houseMapper.updateByPrimaryKeySelective(house);
     }
 
+    @Override
+    public Integer insertSelective(House record) {
+        return houseMapper.insertSelective(record);
+    }
+
 }

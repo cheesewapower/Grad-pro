@@ -8,8 +8,48 @@
         </div>
       </Header>
     </div>
+    <div>
+      <Modal
+        v-model="modaladd"
+        title="添加房屋"
+        :mask-closable="false"
+      >
+        <div class="form-con">
+          <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+
+            <FormItem label="所属楼房" prop="buildingid">
+              <Input v-model="formValidate.buildingid" placeholder="输入所属楼房"></Input>
+            </FormItem>
+            <FormItem label="房屋编号" prop="housesn">
+              <Input v-model="formValidate.housesn" placeholder="输入房屋编号"></Input>
+            </FormItem>
+            <FormItem label="房屋剩余年限" prop="houseyear">
+              <Input v-model="formValidate.houseyear" placeholder="输入房屋剩余年限"></Input>
+            </FormItem>
+            <FormItem label="房屋面积" prop="housesize">
+              <Input v-model="formValidate.housesize" placeholder="输入房屋面积"></Input>
+            </FormItem>
+            <FormItem label="房产证号" prop="housecq">
+              <Input v-model="formValidate.housecq" placeholder="输入房产证号"></Input>
+            </FormItem>
+            <FormItem label="房屋价格" prop="houseprice">
+              <Input v-model="formValidate.houseprice" placeholder="输入房屋价格"></Input>
+            </FormItem>
+          </Form>
+
+        </div>
+        <div slot="footer">
+          <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+          <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+        </div>
+
+      </Modal>
+    </div>
+
+
+
     <div id="addstaff">
-      <Button type="primary" v-on:click="add">新增</Button>
+      <Button type="primary" @click="modaladd = true">新增</Button>
     </div>
     <div>
       <Table stripe :columns="columns1" :data="rows"></Table>
@@ -35,6 +75,41 @@
     name: "buyer",
     data() {
       return {
+        formValidate: {
+          buildingid: '',
+          housesn: '',
+          houseyear: '',
+          housesize: '',
+          housecq: '',
+          houseprice: '',
+          housestatus:0,
+        },
+        ruleValidate: {
+          buildingid: [
+            { required: true, message: '所属楼盘不能为空', trigger: 'blur' }
+          ],
+          housesn: [
+            { required: true, message: '房屋编号不能为空', trigger: 'blur' }
+          ],
+          houseyear: [
+            { required: true, message: '房屋年限不能为空', trigger: 'blur' },
+
+          ],
+          housesize: [
+            { required: true, message: '房屋面积不能为空', trigger: 'blur' },
+
+          ],
+          housecq: [
+            { required: true, message: '房产证号不能为空', trigger: 'blur' },
+
+          ],
+          houseprice: [
+            { required: true, message: '房屋面积不能为空', trigger: 'blur' },
+
+          ],
+
+        },
+        modaladd: false,
         total: 100,
         page: 1,
         page_size: 10,
@@ -100,11 +175,7 @@
                   style: {
                     marginRight: '5px'
                   },
-                  on: {
-                    click: () => {
-                      this.show(params.index)
-                    }
-                  }
+                  on: {}
                 }, '编辑'),
                 h('Button', {
                   props: {
@@ -189,6 +260,43 @@
             })
 
         })
+
+      },
+
+      handleSubmit (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.axios.post("api/house/insertSelective", {
+              buildingid: this.formValidate.buildingid,
+              housesn: this.formValidate.housesn,
+              houseyear: this.formValidate.houseyear,
+              housesize: this.formValidate.housesize,
+              housecq: this.formValidate.housecq,
+              houseprice: this.formValidate.houseprice,
+              housestatus:0,
+            }).then(response => {
+              this.modaladd=false;
+              this.axios.get("api/house/findAllByPage", {
+                params: {
+                  pageNum: 1,
+                  pageSize: 10
+                }
+              })
+                .then(response => {
+                  this.rows = response.data.list;
+                  this.total = response.data.total;
+                })
+            })
+
+
+          } else {
+            this.$Message.error('Fail!');
+
+          }
+        })
+      },
+      handleReset (name) {
+        this.$refs[name].resetFields();
 
       }
 

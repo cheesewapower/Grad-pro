@@ -10,8 +10,43 @@
       </Header>
     </div>
 
+    <div>
+      <Modal
+        v-model="modaladd"
+        title="添加房屋"
+        :mask-closable="false"
+      >
+        <div class="form-con">
+
+          <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
+            <FormItem label="员工姓名" prop="staffname">
+              <Input v-model="formValidate.staffname" placeholder="输入员工姓名"></Input>
+            </FormItem>
+            <FormItem label="员工所属部门" prop="staffde">
+              <Input v-model="formValidate.staffde" placeholder="输入员工所属部门"></Input>
+            </FormItem>
+            <FormItem label="员工工资" prop="staffmoney">
+              <Input v-model="formValidate.staffmoney" placeholder="输入员工工资"></Input>
+            </FormItem>
+            <FormItem label="员工等级" prop="stafflever">
+              <Input v-model="formValidate.stafflever" placeholder="输入员工等级"></Input>
+            </FormItem>
+            <FormItem label="员工描述" prop="staffdesc">
+              <Input v-model="formValidate.staffdesc" placeholder="输入员工描述"></Input>
+            </FormItem>
+          </Form>
+
+        </div>
+        <div slot="footer">
+          <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+          <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+        </div>
+
+      </Modal>
+    </div>
+
     <div id="addstaff">
-      <Button type="primary" v-on:click="add">新增</Button>
+      <Button type="primary" @click="modaladd = true">新增</Button>
     </div>
     <div>
       <Table stripe :columns="columns1" :data="rows"></Table>
@@ -36,7 +71,29 @@
   export default {
     name: "staff",
     data() {
-      return {
+      return {formValidate: {
+          staffname:'',
+          staffde:'',
+          staffmoney:'',
+          stafflever:'',
+          staffdesc:'',
+        },
+        ruleValidate: {
+          staffname: [
+            { required: true, message: '员工姓名不能为空', trigger: 'blur' }
+          ],
+          staffde: [
+            { required: true, message: '员工所属部门不能为空', trigger: 'blur' }
+          ],
+          staffmoney: [
+            { required: true, message: '员工工资不能为空', trigger: 'blur' },
+          ],
+          stafflever: [
+            { required: true, message: '员工等级不能为空', trigger: 'blur' },
+          ],
+
+        },
+        modaladd:false,
         total: 100,
         page: 1,
         page_size: 10,
@@ -95,7 +152,7 @@
                   },
                   on: {
                     click: () => {
-
+                      this.remove(params)
                     }
                   }
                 }, '删除')
@@ -117,8 +174,6 @@
 
       })
         .then(response => {
-          console.log(response.data.list[0].staffname);
-          console.log(response);
           this.rows = response.data.list;
           this.total = response.data.total;
         })
@@ -150,6 +205,60 @@
 
           this.rows = response.data.list;
           this.total = response.data.total;
+        })
+
+      },
+      handleSubmit (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.axios.post("api/staff/insertSelective", {
+              staffname:this.formValidate.staffname,
+              staffde:this.formValidate.staffde,
+              staffmoney:this.formValidate.staffmoney,
+              stafflever:this.formValidate.stafflever,
+              staffdesc:this.formValidate.staffdesc,
+            }).then(response => {
+              this.modaladd=false;
+              this.axios.get("api/staff/findAllByPage", {
+                params: {
+                  pageNum: 1,
+                  pageSize: 10
+                }
+              })
+                .then(response => {
+                  this.rows = response.data.list;
+                  this.total = response.data.total;
+                })
+            })
+
+
+          } else {
+            this.$Message.error('Fail!');
+
+          }
+        })
+      },
+      handleReset (name) {
+        this.$refs[name].resetFields();
+
+      },
+      remove(params) {
+        this.axios.delete("api/staff/deleteByPrimaryKey", {
+          params: {
+            id: params.row.id
+          }
+        }).then(response => {
+          this.axios.get("api/staff/findAllByPage", {
+            params: {
+              pageNum: 1,
+              pageSize: 10
+            }
+          })
+            .then(response => {
+              this.rows = response.data.list;
+              this.total = response.data.total;
+            })
+
         })
 
       },

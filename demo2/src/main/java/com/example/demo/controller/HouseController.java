@@ -57,6 +57,9 @@ public class HouseController {
     public Integer updateByPrimaryKeySelective(@RequestBody House record){
         return houseService.updateByPrimaryKeySelective(record);
     }
-
+    @PostMapping(value = "/insertSelective")
+    public Integer insert(@RequestBody House record) {
+        return houseService.insertSelective(record);
+    }
 }
 

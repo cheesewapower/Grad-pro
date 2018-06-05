@@ -7,9 +7,11 @@
           <span>一般客户管理</span>
         </div>
       </Header>
-    </div> <Modal
+    </div>
+    <Modal
     v-model="modaladd"
     title="记录客户信息"
+    :mask-closable="false"
     >
     <div class="form-con">
 

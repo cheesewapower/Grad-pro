@@ -9,7 +9,7 @@ import com.github.pagehelper.PageRowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+
 
 @Component
 public class StaffServiceImpl implements StaffService{
@@ -26,6 +26,15 @@ public class StaffServiceImpl implements StaffService{
         PageRowBounds rowBounds=new PageRowBounds((pageNum-1)*pageSize,pageSize);
         PageInfo<Staff> p=new PageInfo(staffMapper.queryAllByPage(rowBounds));
         return p;
+    }
+    @Override
+    public Integer insertSelective(Staff record) {
+        return staffMapper.insertSelective(record);
+    }
+
+    @Override
+    public Integer deleteByPrimaryKey(Integer id) {
+        return staffMapper.deleteByPrimaryKey(id);
     }
 
 }

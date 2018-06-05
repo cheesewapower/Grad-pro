@@ -9,4 +9,8 @@ public interface StaffService {
     Staff selectByPrimaryKey(Integer id);
 
     PageInfo<Staff> queryAllByPage(Integer pageNum, Integer pageSize);
+
+    Integer insertSelective(Staff record);
+
+    Integer deleteByPrimaryKey(Integer id);
 }

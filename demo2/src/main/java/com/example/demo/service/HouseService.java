@@ -23,4 +23,6 @@ public interface HouseService {
     Calcu statistics(String startDate, String endDate);
 
     int updateByPrimaryKeySelective(House house);
+
+    Integer insertSelective(House record);
 }
