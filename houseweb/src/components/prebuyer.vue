@@ -181,8 +181,19 @@
 
         }).then(response => {
           this.modalup=false,
-          this.rows = response.data.list;
-          this.total = response.data.total;
+            this.axios.get("api/buyer/queryAllByType",{
+              params: {
+                pageNum:1,
+                pageSize:10,
+                buytype:1
+              }
+            }).then(response => {
+
+              this.rows=response.data.list;
+              this.total=response.data.total;
+            })
+
+
         })
       },
 
